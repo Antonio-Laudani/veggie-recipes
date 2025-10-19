@@ -1,0 +1,77 @@
+@import "flowbite/dist/flowbite.css";
+@plugin "flowbite/plugin";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Global */
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+   scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE e vecchi Edge */
+}
+#root::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  @apply bg-light-background text-light-gray dark:bg-dark-background dark:text-dark-gray;
+   font-family: inherit; /* <- qui inherit permette alle classi html di funzionare */
+}
+
+
+/* Alternative font */
+.font-lexend {
+  font-family: 'Lexend', sans-serif;
+}
+
+.font-classico {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* Links */
+a {
+  @apply font-medium text-light-green hover:text-dark-green dark:text-dark-gray dark:hover:text-dark-green;
+}
+
+/* Headings */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+/* Buttons */
+button {
+  @apply rounded-lg border border-transparent px-4 py-2 
+         font-medium cursor-pointer transition-colors duration-200;
+
+  font-family: inherit;
+  @apply bg-dark-green text-white hover:bg-light-green 
+         dark:bg-dark-green dark:text-dark-gray dark:hover:bg-green-darkest;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Disable transitions on first render*/ 
+html.transition-none *, html.transition-none {
+  transition: none !important;
+  -webkit-transition: none !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-in forwards;
+}
