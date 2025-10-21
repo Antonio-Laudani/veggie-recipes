@@ -1,6 +1,4 @@
 import { useState } from "react";
-//import "flowbite";
-//import "../index.css"; // assicurati che tailwind sia importato
 
 function ContactForm() {
   const [email, setEmail] = useState("");

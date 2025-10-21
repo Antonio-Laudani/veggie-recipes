@@ -1,6 +1,3 @@
-import React from "react";
-//import "flowbite";
-//import "../index.css"; // assicurati che tailwind sia importato
 import {teamMembers} from "../data/team" //data team
 
 export default function About() {

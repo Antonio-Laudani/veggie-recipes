@@ -1,10 +1,5 @@
 // src/components/RecipeHeader.jsx
-import React from "react";
 import { HeartIcon, ArrowLeftIcon } from "@heroicons/react/24/solid";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorite } from "../store/favoritesSlice";
-import { showToast } from "../components/ToastNotification";
-
 export default function RecipeHeader({ title, favorite, toggleFavorite, navigate }) {
   return (
     <div className="flex items-center justify-between mb-4">
