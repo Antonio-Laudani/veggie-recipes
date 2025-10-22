@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import CardRicetta from "../components/CardRicetta";
 import { useSelector, useDispatch } from "react-redux";

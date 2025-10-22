@@ -1,12 +1,8 @@
 // src/components/ToastNotification.jsx
 import "flowbite"; // importa side-effect: aggiunge Toast a window
-
-// src/components/ToastNotification.jsx
 export function showToast(message, type = "success") {
-  // Crea il contenitore toast
   const toastEl = document.createElement("div");
 
-  // Classe base: centro pagina, sopra tutti gli altri elementi
   toastEl.className = `
     fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
     z-[9999] flex items-center w-auto max-w-xs p-4 mb-4

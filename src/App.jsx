@@ -16,7 +16,6 @@ import 'flowbite';
 
 function App() {
 
-  // Usa l'hook pulito
   const { darkMode, toggleDarkMode } = useDarkMode();
    const { fontLexend, toggleFont } = useFont();
   // SOLO per il font: usa classList.toggle per NON sovrascrivere altre classi
@@ -25,7 +24,7 @@ function App() {
     root.classList.toggle('font-lexend', fontLexend);
     root.classList.toggle('font-classico', !fontLexend);
   }, [fontLexend]);
-   // 🩵 Evita lo "sfarfallio" al cambio di pagina
+   // Evita lo "sfarfallio" al cambio di pagina
   useEffect(() => {
     const html = document.documentElement;
     html.classList.add("transition-none");
