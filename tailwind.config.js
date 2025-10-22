@@ -23,7 +23,7 @@ export default {
         "dark-gray": "#CCCCCC",
       },
        boxShadow: {
-       "dark-green-sm": "0 2px 4px rgba(46,125,50,0.3)",      // più uniforme, anche sopra
+       "dark-green-sm": "0 2px 4px rgba(46,125,50,0.3)",  
   "dark-green-md": "0 4px 6px rgba(46,125,50,0.5), 0 2px 4px rgba(46,125,50,0.5)",
   "dark-green-lg": "0 10px 15px rgba(46,125,50,0.6), 0 4px 6px rgba(46,125,50,0.6)",
       },
