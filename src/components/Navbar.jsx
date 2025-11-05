@@ -8,38 +8,40 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
   const isActive = (path) => location.pathname === path;
 
   useEffect(() => {
-    initFlowbite(); // 👈 INIZIALIZZA FLOWBITE OGNI VOLTA CHE CAMBIA LA PAGINA
+  // inizializza Flowbite una sola volta
+  initFlowbite();
 
-    const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
-    const collapseMenu = document.getElementById("navbar-default");
+  const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
+  const collapseMenu = document.getElementById("navbar-default");
+  if (!toggleBtn || !collapseMenu) return;
 
-    if (!toggleBtn || !collapseMenu) return;
+  const closeMenu = () => {
+    if (!collapseMenu.classList.contains("hidden")) {
+      toggleBtn.click();
+    }
+  };
 
-    const closeMenu = () => {
-      if (!collapseMenu.classList.contains("hidden")) {
-        toggleBtn.click();
-      }
-    };
+  // Chiude al click sui link mobile
+  const links = collapseMenu.querySelectorAll("a");
+  links.forEach(link => link.addEventListener("click", closeMenu));
 
-    // Chiude il menu quando cambia pagina
-    closeMenu();
-
-    // Chiude anche se clicchi su un link (solo in mobile)
-    const links = collapseMenu.querySelectorAll("a");
-    links.forEach((link) => link.addEventListener("click", closeMenu));
-
-      // Chiude il menu se clicchi fuori (document)
+  // Chiude al click fuori (solo mobile)
   const handleOutsideClick = (e) => {
-    if (!collapseMenu.contains(e.target) && e.target !== toggleBtn) {
-      closeMenu();
+    if (window.innerWidth < 768) { // mobile
+      if (!collapseMenu.contains(e.target) && e.target !== toggleBtn) {
+        closeMenu();
+      }
     }
   };
   document.addEventListener("click", handleOutsideClick);
 
-    return () => {
-      links.forEach((link) => link.removeEventListener("click", closeMenu));
-    };
-  }, [location.pathname]);
+  // Cleanup: rimuove listener quando il componente si smonta
+  return () => {
+    links.forEach(link => link.removeEventListener("click", closeMenu));
+    document.removeEventListener("click", handleOutsideClick);
+  };
+}, []); // solo una volta
+
 
   const menuItems = [
     { name: "Home", href: "/" },
