@@ -15,12 +15,15 @@ useEffect(() => {
 
   if (!toggleBtn || !collapseMenu) return;
 
-  // Inizializza il Collapse di Flowbite
+  // Collapse Flowbite
   const collapse = new Collapse(collapseMenu, toggleBtn);
+
+  // Funzione da usare per add/remove listener
+  const handleLinkClick = () => collapse.hide();
 
   // Chiude al click sui link mobile
   const links = collapseMenu.querySelectorAll("a");
-  links.forEach(link => link.addEventListener("click", () => collapse.hide()));
+  links.forEach(link => link.addEventListener("click", handleLinkClick));
 
   // Chiude al click fuori (solo mobile)
   const handleOutsideClick = (e) => {
@@ -32,11 +35,13 @@ useEffect(() => {
   };
   document.addEventListener("click", handleOutsideClick);
 
+  // Cleanup
   return () => {
-    links.forEach(link => link.removeEventListener("click", () => collapse.hide()));
+    links.forEach(link => link.removeEventListener("click", handleLinkClick));
     document.removeEventListener("click", handleOutsideClick);
   };
-}, []);
+}, [location.pathname]); // chiude anche al cambio pagina
+
 
 
 
