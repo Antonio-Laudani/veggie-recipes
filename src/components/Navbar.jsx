@@ -1,47 +1,42 @@
 import { useEffect } from "react";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { useLocation, Link } from "react-router-dom";
-import { initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
+import { Collapse, initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
 
 const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
 useEffect(() => {
-  // inizializza Flowbite una sola volta
   initFlowbite();
 
   const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
   const collapseMenu = document.getElementById("navbar-default");
+
   if (!toggleBtn || !collapseMenu) return;
 
-  const closeMenu = () => {
-    if (!collapseMenu.classList.contains("hidden")) {
-      collapseMenu.classList.add("hidden"); // chiude il menu
-      toggleBtn.setAttribute("aria-expanded", "false"); // aggiorna attributo aria
-    }
-  };
+  // Inizializza il Collapse di Flowbite
+  const collapse = new Collapse(collapseMenu, toggleBtn);
 
   // Chiude al click sui link mobile
   const links = collapseMenu.querySelectorAll("a");
-  links.forEach(link => link.addEventListener("click", closeMenu));
+  links.forEach(link => link.addEventListener("click", () => collapse.hide()));
 
   // Chiude al click fuori (solo mobile)
   const handleOutsideClick = (e) => {
     if (window.innerWidth < 768) {
       if (!collapseMenu.contains(e.target) && e.target !== toggleBtn) {
-        closeMenu();
+        collapse.hide();
       }
     }
   };
   document.addEventListener("click", handleOutsideClick);
 
-  // Cleanup: rimuove listener quando il componente si smonta
   return () => {
-    links.forEach(link => link.removeEventListener("click", closeMenu));
+    links.forEach(link => link.removeEventListener("click", () => collapse.hide()));
     document.removeEventListener("click", handleOutsideClick);
   };
-}, []); // eseguito solo una volta
+}, []);
 
 
 
