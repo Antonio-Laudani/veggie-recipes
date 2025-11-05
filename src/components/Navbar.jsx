@@ -1,47 +1,45 @@
 import { useEffect } from "react";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { useLocation, Link } from "react-router-dom";
-import { initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
+import { Collapse, initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
 
 const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
-  useEffect(() => {
-    // Inizializza Flowbite (gestisce hamburger toggle)
-    initFlowbite();
+useEffect(() => {
+  // inizializza Flowbite
+  initFlowbite();
 
-    const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
-    const collapseMenu = document.getElementById("navbar-default");
+  const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
+  const collapseMenu = document.getElementById("navbar-default");
+  if (!toggleBtn || !collapseMenu) return;
 
-    if (!toggleBtn || !collapseMenu) return;
+  // crea istanza Collapse di Flowbite
+  const collapse = new Collapse(collapseMenu, toggleBtn);
 
-    // Chiude il menu al click su un link
-    const links = collapseMenu.querySelectorAll("a");
-    const handleLinkClick = () => {
-      collapseMenu.classList.add("hidden");
-      toggleBtn.setAttribute("aria-expanded", "false");
-    };
-    links.forEach(link => link.addEventListener("click", handleLinkClick));
+  // chiude al click sui link (solo mobile)
+  const links = collapseMenu.querySelectorAll("a");
+  const handleLinkClick = () => collapse.hide();
+  links.forEach(link => link.addEventListener("click", handleLinkClick));
 
-    // Chiude il menu al click fuori (solo mobile)
-    const handleOutsideClick = (e) => {
-      if (window.innerWidth < 768 && !collapseMenu.contains(e.target) && e.target !== toggleBtn) {
-        collapseMenu.classList.add("hidden");
-        toggleBtn.setAttribute("aria-expanded", "false");
-      }
-    };
-    document.addEventListener("click", handleOutsideClick);
+  // chiude al click fuori (solo mobile)
+  const handleOutsideClick = (e) => {
+    if (window.innerWidth < 768 && !collapseMenu.contains(e.target) && e.target !== toggleBtn) {
+      collapse.hide();
+    }
+  };
+  document.addEventListener("click", handleOutsideClick);
 
-    // Chiude il menu quando cambia pagina
-    collapseMenu.classList.add("hidden");
-    toggleBtn.setAttribute("aria-expanded", "false");
+  // chiude menu quando cambia pagina
+  collapse.hide();
 
-    return () => {
-      links.forEach(link => link.removeEventListener("click", handleLinkClick));
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, [location.pathname]);
+  return () => {
+    links.forEach(link => link.removeEventListener("click", handleLinkClick));
+    document.removeEventListener("click", handleOutsideClick);
+  };
+}, [location.pathname]);
+
 
   const menuItems = [
     { name: "Home", href: "/" },
