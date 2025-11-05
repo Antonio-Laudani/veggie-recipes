@@ -43,12 +43,6 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
     };
   }, [location.pathname]);
 
-  return null; // Mantieni il resto della navbar come prima
-
-
-
-
-
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
