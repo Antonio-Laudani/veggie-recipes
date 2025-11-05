@@ -9,13 +9,14 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
 
 
 useEffect(() => {
+  // Inizializza Flowbite
   initFlowbite();
 
   const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
   const collapseMenu = document.getElementById("navbar-default");
   if (!toggleBtn || !collapseMenu) return;
 
-  // Chiude al click sui link
+  // Chiude al click sui link (solo mobile)
   const links = collapseMenu.querySelectorAll("a");
   const handleLinkClick = () => {
     if (window.innerWidth < 768 && !collapseMenu.classList.contains("hidden")) {
@@ -25,28 +26,29 @@ useEffect(() => {
   
   links.forEach(link => link.addEventListener("click", handleLinkClick));
 
-  // Chiude al click fuori - con timeout per evitare conflitti
+  // Chiude al click fuori - VERSIONE MIGLIORATA
   const handleOutsideClick = (e) => {
+    // Solo per mobile
     if (window.innerWidth >= 768) return;
     
     const isToggleButton = e.target === toggleBtn || toggleBtn.contains(e.target);
     const isMenu = collapseMenu.contains(e.target);
     
+    // Se clicco fuori E il menu è aperto
     if (!isToggleButton && !isMenu && !collapseMenu.classList.contains("hidden")) {
-      setTimeout(() => {
-        toggleBtn.click();
-      }, 10);
+      toggleBtn.click();
     }
   };
-  
-  // Aggiungi l'event listener con un piccolo ritardo
-  setTimeout(() => {
+
+  // Aggiungi l'event listener con un piccolo delay per evitare conflitti iniziali
+  const timer = setTimeout(() => {
     document.addEventListener("click", handleOutsideClick);
-  }, 100);
+  }, 50);
 
   return () => {
     links.forEach(link => link.removeEventListener("click", handleLinkClick));
     document.removeEventListener("click", handleOutsideClick);
+    clearTimeout(timer);
   };
 }, [location.pathname]);
 
