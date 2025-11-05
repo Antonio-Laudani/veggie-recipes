@@ -1,12 +1,15 @@
 import { useEffect } from "react";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { useLocation, Link } from "react-router-dom";
+import { initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
 
 const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
   useEffect(() => {
+    initFlowbite(); // 👈 INIZIALIZZA FLOWBITE OGNI VOLTA CHE CAMBIA LA PAGINA
+
     const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
     const collapseMenu = document.getElementById("navbar-default");
 
@@ -14,7 +17,6 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
 
     const closeMenu = () => {
       if (!collapseMenu.classList.contains("hidden")) {
-        // Simula un click sul bottone Flowbite → chiude il menu
         toggleBtn.click();
       }
     };
