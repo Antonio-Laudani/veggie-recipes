@@ -9,39 +9,39 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
 
 
 useEffect(() => {
-  // Inizializza Flowbite (gestisce toggle)
+  // Inizializza Flowbite
   initFlowbite();
 
   const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
   const collapseMenu = document.getElementById("navbar-default");
   if (!toggleBtn || !collapseMenu) return;
 
-  // --- Chiude al click su link (solo mobile) ---
+  // Chiude al click sui link (solo mobile)
   const links = collapseMenu.querySelectorAll("a");
-  const handleLinkClick = (e) => {
-    // controlla se menu aperto
+  const handleLinkClick = () => {
     if (!collapseMenu.classList.contains("hidden")) {
-      toggleBtn.click(); // usa toggle Flowbite nativo
+      toggleBtn.click(); // usa il toggle nativo di Flowbite
     }
   };
   links.forEach(link => link.addEventListener("click", handleLinkClick));
 
-  // --- Chiude al click fuori (solo mobile) ---
+  // Chiude al click fuori dal menu (solo mobile)
   const handleOutsideClick = (e) => {
     if (window.innerWidth < 768 && !collapseMenu.contains(e.target) && e.target !== toggleBtn) {
       if (!collapseMenu.classList.contains("hidden")) {
-        toggleBtn.click(); // chiude con toggle nativo
+        toggleBtn.click(); // usa il toggle nativo
       }
     }
   };
   document.addEventListener("click", handleOutsideClick);
 
-  // --- Cleanup ---
   return () => {
+    // Cleanup
     links.forEach(link => link.removeEventListener("click", handleLinkClick));
     document.removeEventListener("click", handleOutsideClick);
   };
-}, [location.pathname]); // esegue ad ogni cambio pagina
+}, [location.pathname]);
+
 
 
 
