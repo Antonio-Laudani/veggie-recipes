@@ -7,7 +7,7 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
-  useEffect(() => {
+useEffect(() => {
   // inizializza Flowbite una sola volta
   initFlowbite();
 
@@ -17,7 +17,8 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
 
   const closeMenu = () => {
     if (!collapseMenu.classList.contains("hidden")) {
-      toggleBtn.click();
+      collapseMenu.classList.add("hidden"); // chiude il menu
+      toggleBtn.setAttribute("aria-expanded", "false"); // aggiorna attributo aria
     }
   };
 
@@ -27,7 +28,7 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
 
   // Chiude al click fuori (solo mobile)
   const handleOutsideClick = (e) => {
-    if (window.innerWidth < 768) { // mobile
+    if (window.innerWidth < 768) {
       if (!collapseMenu.contains(e.target) && e.target !== toggleBtn) {
         closeMenu();
       }
@@ -40,7 +41,8 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
     links.forEach(link => link.removeEventListener("click", closeMenu));
     document.removeEventListener("click", handleOutsideClick);
   };
-}, []); // solo una volta
+}, []); // eseguito solo una volta
+
 
 
   const menuItems = [
