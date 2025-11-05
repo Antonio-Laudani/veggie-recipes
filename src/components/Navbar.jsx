@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { useLocation, Link } from "react-router-dom";
-import { Collapse, initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
+import { initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
 
 const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
   const location = useLocation();
