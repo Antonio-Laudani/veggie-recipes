@@ -1,46 +1,50 @@
 import { useEffect } from "react";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { useLocation, Link } from "react-router-dom";
-import { Collapse, initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
+import { initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
 
 const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
-useEffect(() => {
-  initFlowbite();
+  useEffect(() => {
+    // Inizializza Flowbite (gestisce hamburger toggle)
+    initFlowbite();
 
-  const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
-  const collapseMenu = document.getElementById("navbar-default");
+    const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
+    const collapseMenu = document.getElementById("navbar-default");
 
-  if (!toggleBtn || !collapseMenu) return;
+    if (!toggleBtn || !collapseMenu) return;
 
-  // Collapse Flowbite
-  const collapse = new Collapse(collapseMenu, toggleBtn);
+    // Chiude il menu al click su un link
+    const links = collapseMenu.querySelectorAll("a");
+    const handleLinkClick = () => {
+      collapseMenu.classList.add("hidden");
+      toggleBtn.setAttribute("aria-expanded", "false");
+    };
+    links.forEach(link => link.addEventListener("click", handleLinkClick));
 
-  // Funzione da usare per add/remove listener
-  const handleLinkClick = () => collapse.hide();
-
-  // Chiude al click sui link mobile
-  const links = collapseMenu.querySelectorAll("a");
-  links.forEach(link => link.addEventListener("click", handleLinkClick));
-
-  // Chiude al click fuori (solo mobile)
-  const handleOutsideClick = (e) => {
-    if (window.innerWidth < 768) {
-      if (!collapseMenu.contains(e.target) && e.target !== toggleBtn) {
-        collapse.hide();
+    // Chiude il menu al click fuori (solo mobile)
+    const handleOutsideClick = (e) => {
+      if (window.innerWidth < 768 && !collapseMenu.contains(e.target) && e.target !== toggleBtn) {
+        collapseMenu.classList.add("hidden");
+        toggleBtn.setAttribute("aria-expanded", "false");
       }
-    }
-  };
-  document.addEventListener("click", handleOutsideClick);
+    };
+    document.addEventListener("click", handleOutsideClick);
 
-  // Cleanup
-  return () => {
-    links.forEach(link => link.removeEventListener("click", handleLinkClick));
-    document.removeEventListener("click", handleOutsideClick);
-  };
-}, [location.pathname]); // chiude anche al cambio pagina
+    // Chiude il menu quando cambia pagina
+    collapseMenu.classList.add("hidden");
+    toggleBtn.setAttribute("aria-expanded", "false");
+
+    return () => {
+      links.forEach(link => link.removeEventListener("click", handleLinkClick));
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [location.pathname]);
+
+  return null; // Mantieni il resto della navbar come prima
+
 
 
 
