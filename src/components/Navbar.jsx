@@ -28,6 +28,14 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
     const links = collapseMenu.querySelectorAll("a");
     links.forEach((link) => link.addEventListener("click", closeMenu));
 
+      // Chiude il menu se clicchi fuori (document)
+  const handleOutsideClick = (e) => {
+    if (!collapseMenu.contains(e.target) && e.target !== toggleBtn) {
+      closeMenu();
+    }
+  };
+  document.addEventListener("click", handleOutsideClick);
+
     return () => {
       links.forEach((link) => link.removeEventListener("click", closeMenu));
     };
