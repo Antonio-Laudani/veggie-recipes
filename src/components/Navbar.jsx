@@ -1,43 +1,50 @@
 import { useEffect } from "react";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { useLocation, Link } from "react-router-dom";
-import { initFlowbite, Collapse } from "flowbite"; // 👈 AGGIUNTA QUI
+import { initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
 
 const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
+
 useEffect(() => {
-  // Inizializza Flowbite (gestisce l’hamburger toggle)
+  // inizializza Flowbite una volta
   initFlowbite();
 
   const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
   const collapseMenu = document.getElementById("navbar-default");
   if (!toggleBtn || !collapseMenu) return;
 
-  // Inizializza il Collapse di Flowbite
-  const collapse = new Collapse(collapseMenu, toggleBtn);
-
-  // Chiude al click sui link mobile
+  // chiude il menu al click su link (mobile)
   const links = collapseMenu.querySelectorAll("a");
-  const handleLinkClick = () => collapse.hide();
+  const handleLinkClick = () => {
+    if (!collapseMenu.classList.contains("hidden")) {
+      toggleBtn.click(); // usa il toggle nativo di Flowbite
+    }
+  };
   links.forEach(link => link.addEventListener("click", handleLinkClick));
 
-  // Chiude al click fuori (solo mobile)
+  // chiude il menu al click fuori (mobile)
   const handleOutsideClick = (e) => {
     if (window.innerWidth < 768 && !collapseMenu.contains(e.target) && e.target !== toggleBtn) {
-      collapse.hide();
+      if (!collapseMenu.classList.contains("hidden")) {
+        toggleBtn.click(); // usa il toggle nativo
+      }
     }
   };
   document.addEventListener("click", handleOutsideClick);
 
-  // Cleanup quando il componente si smonta
+  // chiude il menu quando cambi pagina
+  if (!collapseMenu.classList.contains("hidden")) {
+    toggleBtn.click();
+  }
+
   return () => {
     links.forEach(link => link.removeEventListener("click", handleLinkClick));
     document.removeEventListener("click", handleOutsideClick);
   };
 }, [location.pathname]);
-
 
 
   const menuItems = [
