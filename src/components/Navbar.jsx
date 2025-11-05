@@ -8,37 +8,36 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
   const isActive = (path) => location.pathname === path;
 
 useEffect(() => {
-  // inizializza Flowbite
+  // inizializza Flowbite (gestisce hamburger toggle)
   initFlowbite();
 
   const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
   const collapseMenu = document.getElementById("navbar-default");
   if (!toggleBtn || !collapseMenu) return;
 
-  // crea istanza Collapse di Flowbite
-  const collapse = new Collapse(collapseMenu, toggleBtn);
-
-  // chiude al click sui link (solo mobile)
+  // Chiude il menu al click sui link (solo mobile)
   const links = collapseMenu.querySelectorAll("a");
-  const handleLinkClick = () => collapse.hide();
+  const handleLinkClick = () => {
+    collapseMenu.classList.add("hidden");
+    toggleBtn.setAttribute("aria-expanded", "false");
+  };
   links.forEach(link => link.addEventListener("click", handleLinkClick));
 
-  // chiude al click fuori (solo mobile)
+  // Chiude il menu al click fuori (solo mobile)
   const handleOutsideClick = (e) => {
     if (window.innerWidth < 768 && !collapseMenu.contains(e.target) && e.target !== toggleBtn) {
-      collapse.hide();
+      collapseMenu.classList.add("hidden");
+      toggleBtn.setAttribute("aria-expanded", "false");
     }
   };
   document.addEventListener("click", handleOutsideClick);
-
-  // chiude menu quando cambia pagina
-  collapse.hide();
 
   return () => {
     links.forEach(link => link.removeEventListener("click", handleLinkClick));
     document.removeEventListener("click", handleOutsideClick);
   };
 }, [location.pathname]);
+
 
 
   const menuItems = [
