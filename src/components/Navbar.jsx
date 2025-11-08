@@ -90,25 +90,36 @@ useEffect(() => {
             {fontLexend ? "Lexend" : "Classic"}
           </button>
 
-         {/* Hamburger Button - SOLUZIONE REALE */}
-<button
-  data-collapse-toggle="navbar-default"
-  type="button"
-  className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden 
-           text-black bg-light-background 
-           hover:bg-light-green 
-           active:bg-light-green
-           focus:outline-none focus:ring-2 focus:ring-light-green 
-           dark:bg-dark-background 
-           dark:hover:bg-bright-green 
-           dark:active:bg-bright-green
-           dark:focus:ring-bright-green 
-           transition-colors duration-200"
-  aria-controls="navbar-default"
-  aria-expanded="false"
-  onClick={(e) => e.currentTarget.blur()} /* 👈 RIMUOVE STATO ATTIVO DOPO */
-></button>
-</div>
+          {/* Mobile toggle Flowbite */}
+          <button
+            data-collapse-toggle="navbar-default"
+            type="button"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg 
+             md:hidden 
+            text-black bg-light-background hover:bg-light-green focus:outline-none focus:ring-2 focus:ring-light-green 
+             dark:bg-dark-background dark:hover:bg-bright-green dark:focus:ring-bright-green transition-colors duration-200"
+            aria-controls="navbar-default"
+            aria-expanded="false"
+          >
+            <span className="sr-only">Open main menu</span>
+            <svg
+              className="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+        </div>
+
         {/* Menu Items */}
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium bg-light-background md:flex-row md:space-x-8 md:mt-0 dark:bg-dark-background md:dark:bg-dark-background">
