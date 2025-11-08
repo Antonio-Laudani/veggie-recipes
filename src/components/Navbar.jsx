@@ -108,7 +108,7 @@ useEffect(() => {
   aria-expanded="false"
   onClick={(e) => e.currentTarget.blur()} /* 👈 RIMUOVE STATO ATTIVO DOPO */
 ></button>
-
+</div>
         {/* Menu Items */}
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium bg-light-background md:flex-row md:space-x-8 md:mt-0 dark:bg-dark-background md:dark:bg-dark-background">
