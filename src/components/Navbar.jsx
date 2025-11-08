@@ -1,56 +1,59 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { useLocation, Link } from "react-router-dom";
-import { initFlowbite } from "flowbite";
+import { initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
 
 const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
+
+
+useEffect(() => {
+  // Inizializza Flowbite
+  initFlowbite();
+
+  const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
+  const collapseMenu = document.getElementById("navbar-default");
+  if (!toggleBtn || !collapseMenu) return;
+
+  // Chiude al click sui link (solo mobile)
+  const links = collapseMenu.querySelectorAll("a");
+  const handleLinkClick = () => {
+    if (window.innerWidth < 768 && !collapseMenu.classList.contains("hidden")) {
+      toggleBtn.click();
+    }
+  };
   
-  // State per gestire l'apertura/chiusura del menu
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  links.forEach(link => link.addEventListener("click", handleLinkClick));
 
-  useEffect(() => {
-    initFlowbite();
-
-    const toggleBtn = document.querySelector("[data-collapse-toggle='navbar-default']");
-    const collapseMenu = document.getElementById("navbar-default");
-    if (!toggleBtn || !collapseMenu) return;
-
-    // Chiude al click sui link (solo mobile)
-    const links = collapseMenu.querySelectorAll("a");
-    const handleLinkClick = () => {
-      if (window.innerWidth < 768 && !collapseMenu.classList.contains("hidden")) {
-        toggleBtn.click();
-        setIsMenuOpen(false);
-      }
-    };
+  // Chiude al click fuori - VERSIONE MIGLIORATA
+  const handleOutsideClick = (e) => {
+    // Solo per mobile
+    if (window.innerWidth >= 768) return;
     
-    links.forEach(link => link.addEventListener("click", handleLinkClick));
+    const isToggleButton = e.target === toggleBtn || toggleBtn.contains(e.target);
+    const isMenu = collapseMenu.contains(e.target);
+    
+    // Se clicco fuori E il menu è aperto
+    if (!isToggleButton && !isMenu && !collapseMenu.classList.contains("hidden")) {
+      toggleBtn.click();
+    }
+  };
 
-    // Chiude al click fuori
-    const handleOutsideClick = (e) => {
-      if (window.innerWidth >= 768) return;
-      
-      const isToggleButton = e.target === toggleBtn || toggleBtn.contains(e.target);
-      const isMenu = collapseMenu.contains(e.target);
-      
-      if (!isToggleButton && !isMenu && !collapseMenu.classList.contains("hidden")) {
-        toggleBtn.click();
-        setIsMenuOpen(false);
-      }
-    };
+  // Aggiungi l'event listener con un piccolo delay per evitare conflitti iniziali
+  const timer = setTimeout(() => {
+    document.addEventListener("click", handleOutsideClick);
+  }, 50);
 
-    const timer = setTimeout(() => {
-      document.addEventListener("click", handleOutsideClick);
-    }, 50);
+  return () => {
+    links.forEach(link => link.removeEventListener("click", handleLinkClick));
+    document.removeEventListener("click", handleOutsideClick);
+    clearTimeout(timer);
+  };
+}, [location.pathname]);
 
-    return () => {
-      links.forEach(link => link.removeEventListener("click", handleLinkClick));
-      document.removeEventListener("click", handleOutsideClick);
-      clearTimeout(timer);
-    };
-  }, [location.pathname]);
+
+
 
   const menuItems = [
     { name: "Home", href: "/" },
@@ -87,40 +90,24 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
             {fontLexend ? "Lexend" : "Classic"}
           </button>
 
-          {/* Hamburger Button - VERSIONE CORRETTA */}
-          <button
-            data-collapse-toggle="navbar-default"
-            type="button"
-            className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden 
-                       text-black bg-light-background hover:bg-light-green focus:outline-none focus:ring-2 focus:ring-light-green 
-                       dark:bg-dark-background dark:hover:bg-bright-green dark:focus:ring-bright-green 
-                       transition-colors duration-200
-                       ${isMenuOpen ? 'ring-2 ring-light-green dark:ring-bright-green' : ''}`}
-            aria-controls="navbar-default"
-            aria-expanded={isMenuOpen}
-            onClick={(e) => {
-              setIsMenuOpen(!isMenuOpen);
-              e.currentTarget.blur(); // 👈 RIMUOVE IL FOCUS SUBITO
-            }}
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
-        </div>
+         {/* Hamburger Button - SOLUZIONE REALE */}
+<button
+  data-collapse-toggle="navbar-default"
+  type="button"
+  className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden 
+           text-black bg-light-background 
+           hover:bg-light-green 
+           active:bg-light-green
+           focus:outline-none focus:ring-2 focus:ring-light-green 
+           dark:bg-dark-background 
+           dark:hover:bg-bright-green 
+           dark:active:bg-bright-green
+           dark:focus:ring-bright-green 
+           transition-colors duration-200"
+  aria-controls="navbar-default"
+  aria-expanded="false"
+  onClick={(e) => e.currentTarget.blur()} /* 👈 RIMUOVE STATO ATTIVO DOPO */
+></button>
 
         {/* Menu Items */}
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -152,3 +139,4 @@ const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
 };
 
 export default MyNavbar;
+
