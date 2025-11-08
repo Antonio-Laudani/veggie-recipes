@@ -2,17 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/images/logo.svg" />
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Preload per performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-   <script>
-  // Se era attiva la dark mode, aggiungila SUBITO
-  if (localStorage.getItem("darkMode") === "true") {
-    document.documentElement.classList.add("dark");
-  }
-</script>
-    <title>veggie-recipes</title>
+    
+    <!-- Meta SEO Base -->
+    <title>Veggie Recipes - Easy and Delicious Vegetarian Recipes</title>
+    <meta name="description" content="Discover easy, quick and delicious vegetarian recipes. Ideas for every occasion with fresh, natural ingredients. Healthy and sustainable cooking.">
+    <meta name="keywords" content="vegetarian recipes, healthy cooking, easy recipes, vegan, vegetarian, sustainable cooking">
+    <meta name="author" content="Veggie Recipes">
+    
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:title" content="Veggie Recipes - Easy and Delicious Vegetarian Recipes">
+    <meta property="og:description" content="Discover easy, quick and delicious vegetarian recipes. Ideas for every occasion with fresh, natural ingredients.">
+    <meta property="og:image" content="/images/Veggie-Recipes-OG.png">
+    <meta property="og:url" content="https://veggie-recipes.netlify.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Veggie Recipes">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Veggie Recipes - Easy and Delicious Vegetarian Recipes">
+    <meta name="twitter:description" content="Discover easy, quick and delicious vegetarian recipes. Ideas for every occasion with fresh, natural ingredients.">
+    <meta name="twitter:image" content="/images/Veggie-Recipes-OG.png">
+    
+    <!-- Altri Meta Importanti -->
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Attiva la darkmode direttamente se già impostata -->
+    <script>
+      if (localStorage.getItem("darkMode") === "true") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
