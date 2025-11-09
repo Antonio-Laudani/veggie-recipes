@@ -39,34 +39,41 @@ Il progetto è hostato su **Netlify**, con gestione sicura della chiave API tram
 - **Node.js** 16.0 o superiore  
 - **Account Spoonacular** per l'API key ([registrati qui](https://spoonacular.com/food-api))
 
-### Setup sviluppo
+---
 
+## 🛠️ Setup sviluppo
+
+### 1. Clona il repository
 ```bash
-# Clona il repository
 git clone https://github.com/Antonio-Laudani/veggie-recipes.git
 cd veggie-recipes
-
-# Installa le dipendenze
+2. Installa le dipendenze
+bash
 npm install
-
-# Configura la API key (crea file .env)
+3. Configura la API key
+bash
 echo "VITE_SPOON_KEY=la_tua_api_key_qui" > .env
-
-# Avvia il server di sviluppo
+4. Avvia il server di sviluppo
+bash
 npm run dev
 L'applicazione sarà disponibile su http://localhost:5173
 
-Scripts disponibili
+📜 Scripts disponibili
 bash
-npm run dev      # Server di sviluppo Vite
-npm run build    # Build produzione
-npm run preview  # Anteprima build produzione
-npm run lint     # ESLint per code quality
+# Sviluppo
+npm run dev
+
+# Build produzione
+npm run build
+
+# Anteprima build
+npm run preview
+
+# Controllo codice
+npm run lint
 🎨 Design e Accessibilità
 Font Lexend con Toggle
-Il progetto utilizza il font Lexend di Google Fonts per migliorare leggibilità e accessibilità.
-
-Implementato un toggle nella navbar per alternare tra Lexend e font di sistema.
+Il progetto utilizza il font Lexend di Google Fonts per migliorare leggibilità e accessibilità. Implementato un toggle nella navbar per alternare tra Lexend e font di sistema.
 
 Palette Colori Alto Contrasto
 Light Mode:
@@ -92,44 +99,26 @@ Testo grigio chiaro: #CCCCCC
 La palette è stata studiata per garantire alto contrasto e massima accessibilità visiva, particolarmente utile per utenti con daltonismo.
 
 Dark Mode Persistente
-Il tema scuro viene mantenuto tra le sessioni grazie a localStorage
-
-Toggle accessibile dalla navbar
-
-Transizioni fluide tra i temi
-
-Preferenze utente conservate
+Il tema scuro viene mantenuto tra le sessioni grazie a localStorage. Toggle accessibile dalla navbar con transizioni fluide tra i temi e preferenze utente conservate.
 
 💾 Gestione Stato e Preferiti
 Architettura Redux Toolkit
 Il sistema dei preferiti utilizza Redux Toolkit per una gestione dello stato efficiente e prevedibile. Lo store è configurato centralmente e lo slice dedicato ai preferiti gestisce tutte le operazioni relative alle ricette preferite dell'utente.
 
 Meccanica dei Preferiti
-Il sistema funziona attraverso tre azioni principali che garantiscono un'esperienza utente fluida e persistente:
-
-Aggiunta preferiti: Quando l'utente segna una ricetta come preferita, questa viene aggiunta allo stato globale e immediatamente salvata nel localStorage del browser
+Aggiunta preferiti: Quando l'utente segna una ricetta come preferita, questa viene aggiunta allo stato globale e immediatamente salvata nel localStorage
 
 Rimozione preferiti: La rimozione di una ricetta dai preferiti avviene tramite il suo ID univoco, aggiornando sia lo stato che la memoria persistente
 
 Toggle intelligente: Una singola azione che verifica se una ricetta è già tra i preferiti e, in base a questo, decide se aggiungerla o rimuoverla
 
 Persistenza Automatica
-Tutte le operazioni sui preferiti vengono automaticamente sincronizzate con il localStorage, garantendo che:
-
-Le preferenze dell'utente sopravvivano al refresh della pagina
-
-La lista dei preferiti sia disponibile anche dopo la chiusura del browser
-
-All'avvio dell'applicazione, lo stato venga ripristinato esattamente come lasciato dall'utente
-
-Sincronizzazione in Tempo Reale
-Il sistema mantiene una perfetta sincronizzazione tra lo stato di Redux e il localStorage, assicurando che ogni modifica sia immediatamente persistente e che l'interfaccia utente risponda istantaneamente alle azioni dell'utente.
+Tutte le operazioni sui preferiti vengono automaticamente sincronizzate con il localStorage, garantendo la persistenza dei dati tra le sessioni.
 
 🔐 Sicurezza API con Netlify Functions
 Funzione Serverless
-netlify/functions/spoonacular.js:
-
 javascript
+// netlify/functions/spoonacular.js
 const API_KEY = process.env.VITE_SPOON_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";
 
@@ -190,13 +179,12 @@ const fetchRecipeDetails = async (id) => {
 Configurazione Environment Variables
 Su Netlify Dashboard:
 
-text
+bash
 Site settings → Environment variables
 VITE_SPOON_KEY = la_tua_api_key_qui
 📝 Configurazione Netlify
-netlify.toml:
-
 toml
+# netlify.toml
 [build]
   command = "npm run build"
   publish = "dist"
@@ -225,7 +213,7 @@ Disponibile su http://localhost:8888
 Il progetto è distribuito su Netlify:
 🔗 https://veggie-recipes.netlify.app
 
-Processo:
+Processo di deploy:
 Push su GitHub trigger automatico
 
 Netlify build con npm run build
