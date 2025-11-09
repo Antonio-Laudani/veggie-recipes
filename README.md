@@ -41,7 +41,7 @@ Il progetto è hostato su **Netlify**, con gestione sicura della chiave API tram
 
 ---
 
-🛠️ Setup sviluppo
+## 🛠️ Setup sviluppo
 1️⃣ Clona il repository
 git clone https://github.com/Antonio-Laudani/veggie-recipes.git
 cd veggie-recipes
