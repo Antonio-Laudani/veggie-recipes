@@ -43,23 +43,29 @@ Il progetto è hostato su **Netlify**, con gestione sicura della chiave API tram
 
 ## 🛠️ Setup sviluppo
 
-### 1. Clona il repository
+### 1️⃣ Clona il repository  
 ```bash
 git clone https://github.com/Antonio-Laudani/veggie-recipes.git
 cd veggie-recipes
-2. Installa le dipendenze
+2️⃣ Installa le dipendenze
 bash
+Copia codice
 npm install
-3. Configura la API key
+3️⃣ Configura la API key
+Crea il file .env nella root del progetto:
+
 bash
+Copia codice
 echo "VITE_SPOON_KEY=la_tua_api_key_qui" > .env
-4. Avvia il server di sviluppo
+4️⃣ Avvia il server di sviluppo
 bash
+Copia codice
 npm run dev
-L'applicazione sarà disponibile su http://localhost:5173
+L’applicazione sarà disponibile su 👉 http://localhost:5173
 
 📜 Scripts disponibili
 bash
+Copia codice
 # Sviluppo
 npm run dev
 
@@ -72,53 +78,65 @@ npm run preview
 # Controllo codice
 npm run lint
 🎨 Design e Accessibilità
-Font Lexend con Toggle
-Il progetto utilizza il font Lexend di Google Fonts per migliorare leggibilità e accessibilità. Implementato un toggle nella navbar per alternare tra Lexend e font di sistema.
+🖋️ Font Lexend con Toggle
+Il progetto utilizza il font Lexend di Google Fonts per migliorare leggibilità e accessibilità.
+È presente un toggle nella navbar per alternare tra Lexend e il font di sistema.
 
-Palette Colori Alto Contrasto
-Light Mode:
+🌈 Palette Colori ad Alto Contrasto
+Light Mode
 
-Sfondo: #F5F5DC (beige chiaro)
+Elemento	Colore
+Sfondo	#F5F5DC (beige chiaro)
+Verde primario	#4CAF50
+Verde scuro	#2E7D32
+Testo	#555555
 
-Verde primario: #4CAF50
+Dark Mode
 
-Verde scuro: #2E7D32
+Elemento	Colore
+Sfondo	#121212 (nero quasi puro)
+Verde brillante	#81C784
+Verde molto scuro	#1B5E20
+Testo	#CCCCCC
 
-Testo grigio: #555555
+🎯 La palette è ottimizzata per garantire alto contrasto e accessibilità visiva, anche per utenti con daltonismo.
 
-Dark Mode:
+🌗 Dark Mode Persistente
+Tema scuro mantenuto tra le sessioni via localStorage
 
-Sfondo: #121212 (nero quasi puro)
+Toggle accessibile nella navbar
 
-Verde brillante: #81C784
+Transizioni fluide tra temi
 
-Verde molto scuro: #1B5E20
-
-Testo grigio chiaro: #CCCCCC
-
-La palette è stata studiata per garantire alto contrasto e massima accessibilità visiva, particolarmente utile per utenti con daltonismo.
-
-Dark Mode Persistente
-Il tema scuro viene mantenuto tra le sessioni grazie a localStorage. Toggle accessibile dalla navbar con transizioni fluide tra i temi e preferenze utente conservate.
+Preferenze utente salvate automaticamente
 
 💾 Gestione Stato e Preferiti
-Architettura Redux Toolkit
-Il sistema dei preferiti utilizza Redux Toolkit per una gestione dello stato efficiente e prevedibile. Lo store è configurato centralmente e lo slice dedicato ai preferiti gestisce tutte le operazioni relative alle ricette preferite dell'utente.
+⚙️ Architettura Redux Toolkit
+Il sistema dei preferiti utilizza Redux Toolkit per gestire lo stato in modo efficiente e prevedibile.
+Lo store è configurato centralmente e include uno slice dedicato ai preferiti.
 
-Meccanica dei Preferiti
-Aggiunta preferiti: Quando l'utente segna una ricetta come preferita, questa viene aggiunta allo stato globale e immediatamente salvata nel localStorage
+🧩 Meccanica dei Preferiti
+Aggiunta preferiti → la ricetta viene salvata nello stato globale e in localStorage
 
-Rimozione preferiti: La rimozione di una ricetta dai preferiti avviene tramite il suo ID univoco, aggiornando sia lo stato che la memoria persistente
+Rimozione preferiti → eliminazione tramite ID univoco
 
-Toggle intelligente: Una singola azione che verifica se una ricetta è già tra i preferiti e, in base a questo, decide se aggiungerla o rimuoverla
+Toggle intelligente → una singola azione verifica se aggiungere o rimuovere
 
-Persistenza Automatica
-Tutte le operazioni sui preferiti vengono automaticamente sincronizzate con il localStorage, garantendo la persistenza dei dati tra le sessioni.
+🔁 Persistenza Automatica
+Le modifiche ai preferiti vengono sincronizzate con localStorage, così da:
+
+mantenere i dati tra i refresh
+
+ripristinare lo stato al riavvio dell’app
+
+aggiornare l’interfaccia in tempo reale
 
 🔐 Sicurezza API con Netlify Functions
-Funzione Serverless
+📦 Funzione Serverless
+File: netlify/functions/spoonacular.js
+
 javascript
-// netlify/functions/spoonacular.js
+Copia codice
 const API_KEY = process.env.VITE_SPOON_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";
 
@@ -133,10 +151,7 @@ export async function handler(event) {
         `${BASE_URL}/complexSearch?query=${query}&number=10&diet=vegetarian,vegan&addRecipeInformation=true&apiKey=${API_KEY}`
       );
       const data = await res.json();
-      return {
-        statusCode: 200,
-        body: JSON.stringify(data.results),
-      };
+      return { statusCode: 200, body: JSON.stringify(data.results) };
     }
 
     // Rotta per dettaglio
@@ -146,45 +161,40 @@ export async function handler(event) {
         `${BASE_URL}/${id}/information?includeNutrition=true&apiKey=${API_KEY}`
       );
       const data = await res.json();
-      return {
-        statusCode: 200,
-        body: JSON.stringify(data),
-      };
+      return { statusCode: 200, body: JSON.stringify(data) };
     }
 
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ message: "Invalid route" }),
-    };
+    return { statusCode: 400, body: JSON.stringify({ message: "Invalid route" }) };
   } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: err.message }),
-    };
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
 }
-Chiamate dal Frontend
+🌐 Chiamate dal Frontend
 javascript
-// Per ricerca ricette
+Copia codice
+// Ricerca ricette
 const fetchRecipes = async (query) => {
   const res = await fetch(`/.netlify/functions/spoonacular?query=${query}`);
   return await res.json();
 };
 
-// Per dettaglio ricetta
+// Dettaglio ricetta
 const fetchRecipeDetails = async (id) => {
   const res = await fetch(`/.netlify/functions/spoonacular?id=${id}`);
   return await res.json();
 };
-Configurazione Environment Variables
+⚙️ Configurazione Environment Variables
 Su Netlify Dashboard:
 
 bash
+Copia codice
 Site settings → Environment variables
 VITE_SPOON_KEY = la_tua_api_key_qui
 📝 Configurazione Netlify
+File: netlify.toml
+
 toml
-# netlify.toml
+Copia codice
 [build]
   command = "npm run build"
   publish = "dist"
@@ -196,53 +206,56 @@ toml
   status = 200
 Build: comando e directory di output
 
-Functions: directory delle funzioni serverless
+Functions: directory funzioni serverless
 
-Redirects: gestione routing SPA
+Redirects: gestione SPA routing
 
 🧪 Test in Locale
 bash
-# Installa Netlify CLI globalmente
+Copia codice
+# Installa Netlify CLI
 npm install -g netlify-cli
 
-# Testa l'applicazione con funzioni serverless
+# Avvia app e funzioni serverless
 netlify dev
-Disponibile su http://localhost:8888
+App disponibile su 👉 http://localhost:8888
 
 🌐 Deploy
-Il progetto è distribuito su Netlify:
+Progetto distribuito su Netlify:
 🔗 https://veggie-recipes.netlify.app
 
-Processo di deploy:
-Push su GitHub trigger automatico
+Processo di Deploy
+Push su GitHub → build automatica
 
-Netlify build con npm run build
+npm run build → generazione /dist
 
-Deploy della cartella dist
+Netlify Functions → configurate automaticamente
 
-Setup delle Netlify Functions
-
-Configurazione environment variables
+Environment variables impostate
 
 🐛 Risoluzione Problemi
-Dipendenze installate
+📦 Dipendenze principali
 bash
+Copia codice
 @reduxjs/toolkit@1.9.5    ✓ State management
 react-redux@8.1.0         ✓ React bindings
 react-icons@5.5.0         ✓ Icon library
 @heroicons/react@2.2.0    ✓ SVG icons
 flowbite@1.8.1            ✓ UI components
-Problemi comuni
+❗ Problemi comuni
 API Key non valida → verifica su Spoonacular Dashboard
 
-Funzioni non funzionanti → controlla environment variables su Netlify
+Funzioni serverless non attive → controlla le variabili ambiente su Netlify
 
-Build fallita → rm -rf node_modules && npm install
+Build fallita →
 
+bash
+Copia codice
+rm -rf node_modules && npm install
 👨‍💻 Autore
 Antonio Laudani — Frontend Developer
-GitHub: @Antonio-Laudani
-Live Demo: veggie-recipes.netlify.app
+🌐 GitHub: @Antonio-Laudani
+💻 Live Demo
 
 <div align="center">
 ⭐ Se ti piace questo progetto, lascia una stella sul repository!
