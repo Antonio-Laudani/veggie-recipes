@@ -88,35 +88,35 @@ Controllo del codice:
 ```
 npm run lint	
 ```
-🎨 Design e Accessibilità
-🖋️ Font Lexend con Toggle
+## 🎨 Design e Accessibilità
+### 🖋️ Font Lexend con Toggle
 Il progetto utilizza il font Lexend di Google Fonts per migliorare leggibilità e accessibilità.
 Implementato un toggle nella navbar per alternare tra Lexend e font di sistema.
 
-🌈 Palette Colori Alto Contrasto
-Light Mode
+### 🌈 Palette Colori Alto Contrasto
+#### Light Mode
 
-Sfondo: #F5F5DC (beige chiaro)
+**Sfondo: #F5F5DC (beige chiaro)**
 
-Verde primario: #4CAF50
+**Verde primario: #4CAF50**
 
-Verde scuro: #2E7D32
+**Verde scuro: #2E7D32**
 
-Testo grigio: #555555
+**Testo grigio: #555555**
 
-Dark Mode
+#### Dark Mode
 
-Sfondo: #121212 (nero quasi puro)
+**Sfondo: #121212 (nero quasi puro)**
 
-Verde brillante: #81C784
+**Verde brillante: #81C784**
 
-Verde molto scuro: #1B5E20
+**Verde molto scuro: #1B5E20**
 
-Testo grigio chiaro: #CCCCCC
+**Testo grigio chiaro: #CCCCCC**
 
-🎯 Palette ottimizzata per alto contrasto e accessibilità, utile per utenti con daltonismo.
+🎯 **Palette ottimizzata** per alto contrasto e accessibilità, utile per utenti con daltonismo.
 
-🌗 Dark Mode Persistente
+🌗 **Dark Mode Persistente**
 Tema scuro mantenuto tra le sessioni via localStorage
 
 Toggle nella navbar
