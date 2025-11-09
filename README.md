@@ -42,20 +42,23 @@ Il progetto è hostato su **Netlify**, con gestione sicura della chiave API tram
 ---
 
 ## 🛠️ Setup sviluppo
-1️⃣ Clona il repository
+
+### 1️⃣ Clona il repository
+```bash
 git clone https://github.com/Antonio-Laudani/veggie-recipes.git
 cd veggie-recipes
-
 2️⃣ Installa le dipendenze
+bash
+Copia codice
 npm install
-
 3️⃣ Configura la API key
+bash
+Copia codice
 echo "VITE_SPOON_KEY=la_tua_api_key_qui" > .env
-
 4️⃣ Avvia il server di sviluppo
+bash
+Copia codice
 npm run dev
-
-
 L'applicazione sarà disponibile su 👉 http://localhost:5173
 
 📜 Scripts disponibili
@@ -64,14 +67,13 @@ npm run dev	Avvia il server di sviluppo
 npm run build	Build per produzione
 npm run preview	Anteprima della build
 npm run lint	Controllo del codice
+
 🎨 Design e Accessibilità
 🖋️ Font Lexend con Toggle
-
 Il progetto utilizza il font Lexend di Google Fonts per migliorare leggibilità e accessibilità.
 Implementato un toggle nella navbar per alternare tra Lexend e font di sistema.
 
 🌈 Palette Colori Alto Contrasto
-
 Light Mode
 
 Sfondo: #F5F5DC (beige chiaro)
@@ -92,33 +94,33 @@ Verde molto scuro: #1B5E20
 
 Testo grigio chiaro: #CCCCCC
 
-🎯 La palette è ottimizzata per alto contrasto e massima accessibilità visiva, utile anche per utenti con daltonismo.
+🎯 Palette ottimizzata per alto contrasto e accessibilità, utile per utenti con daltonismo.
 
 🌗 Dark Mode Persistente
+Tema scuro mantenuto tra le sessioni via localStorage
 
-Il tema scuro viene mantenuto tra le sessioni grazie a localStorage.
-Toggle accessibile dalla navbar, con transizioni fluide e preferenze utente salvate automaticamente.
+Toggle nella navbar
+
+Transizioni fluide e preferenze salvate automaticamente
 
 💾 Gestione Stato e Preferiti
 ⚙️ Architettura Redux Toolkit
-
-Il sistema dei preferiti utilizza Redux Toolkit per una gestione dello stato efficiente e prevedibile.
-Lo store è configurato centralmente e lo slice dedicato ai preferiti gestisce tutte le operazioni relative alle ricette salvate dall’utente.
+Il sistema dei preferiti utilizza Redux Toolkit. Lo store è configurato centralmente e uno slice dedicato gestisce tutte le operazioni sui preferiti.
 
 🧩 Meccanica dei Preferiti
+Aggiunta: salva nello stato globale e in localStorage
 
-Aggiunta preferiti: la ricetta viene aggiunta allo stato globale e salvata nel localStorage.
+Rimozione: rimuove tramite ID univoco e aggiorna il localStorage
 
-Rimozione preferiti: avviene tramite ID univoco, aggiornando sia lo stato che la memoria persistente.
-
-Toggle intelligente: una singola azione controlla se aggiungere o rimuovere una ricetta dai preferiti.
+Toggle intelligente: aggiunge o rimuove in base alla presenza
 
 🔁 Persistenza Automatica
-
-Le operazioni sui preferiti vengono sincronizzate con il localStorage, garantendo la conservazione dei dati tra le sessioni e il ripristino automatico al riavvio dell’app.
+Sincronizzazione immediata tra Redux store e localStorage, garantendo persistenza tra sessioni e refresh.
 
 🔐 Sicurezza API con Netlify Functions
 ⚙️ Funzione Serverless
+javascript
+Copia codice
 // netlify/functions/spoonacular.js
 const API_KEY = process.env.VITE_SPOON_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";
@@ -164,8 +166,9 @@ export async function handler(event) {
     };
   }
 }
-
 🌐 Chiamate dal Frontend
+javascript
+Copia codice
 // Per ricerca ricette
 const fetchRecipes = async (query) => {
   const res = await fetch(`/.netlify/functions/spoonacular?query=${query}`);
@@ -177,15 +180,15 @@ const fetchRecipeDetails = async (id) => {
   const res = await fetch(`/.netlify/functions/spoonacular?id=${id}`);
   return await res.json();
 };
-
 ⚙️ Configurazione Environment Variables
-
-Su Netlify Dashboard:
-
+text
+Copia codice
+# Su Netlify Dashboard
 Site settings → Environment variables
 VITE_SPOON_KEY = la_tua_api_key_qui
-
 📝 Configurazione Netlify
+toml
+Copia codice
 # netlify.toml
 [build]
   command = "npm run build"
@@ -196,75 +199,49 @@ VITE_SPOON_KEY = la_tua_api_key_qui
   from = "/*"
   to = "/index.html"
   status = 200
-
-
-Build: comando e directory di output
-
-Functions: directory delle funzioni serverless
-
-Redirects: gestione routing SPA
-
 🧪 Test in Locale
+bash
+Copia codice
 # Installa Netlify CLI globalmente
 npm install -g netlify-cli
 
-# Testa l'applicazione con funzioni serverless
+# Avvia app + funzioni localmente
 netlify dev
-
-
 App disponibile su 👉 http://localhost:8888
 
 🌐 Deploy
+Progetto su Netlify: 🔗 https://veggie-recipes.netlify.app
 
-Progetto distribuito su Netlify:
-🔗 https://veggie-recipes.netlify.app
-
-Processo di deploy:
+Processo:
 
 Push su GitHub → build automatica
 
-npm run build → generazione cartella dist
+npm run build → genera dist
 
-Deploy automatico su Netlify
+Deploy su Netlify (funzioni incluse)
 
-Setup delle Netlify Functions
-
-Configurazione delle variabili ambiente
+Configura env vars
 
 🐛 Risoluzione Problemi
-📦 Dipendenze installate
-
-@reduxjs/toolkit@1.9.5 → State management
-
-react-redux@8.1.0 → React bindings
-
-react-icons@5.5.0 → Icon library
-
-@heroicons/react@2.2.0 → SVG icons
-
-flowbite@1.8.1 → UI components
-
-❗ Problemi comuni
-
-API Key non valida → verifica su Spoonacular Dashboard
-
-Funzioni non funzionanti → controlla le variabili ambiente su Netlify
-
-Build fallita →
-
+bash
+Copia codice
+# In caso di problemi di build
 rm -rf node_modules && npm install
+Dipendenze principali:
+
+@reduxjs/toolkit@1.9.5 — state management
+
+react-redux@8.1.0 — React bindings
+
+react-icons@5.5.0 — icons
+
+@heroicons/react@2.2.0 — svg icons
+
+flowbite@1.8.1 — UI components
 
 👨‍💻 Autore
-
 Antonio Laudani — Frontend Developer
 🔗 GitHub: @Antonio-Laudani
-
 💻 Live Demo
 
-<div align="center">
-
-⭐ Se ti piace questo progetto, lascia una stella sul repository!
-
-Buon appetito e happy coding! 🍴💻
-
-</div>
+<div align="center"> ⭐ Se ti piace questo progetto, lascia una **stella** sul repository! **Buon appetito e happy coding! 🍴💻** </div> ```
