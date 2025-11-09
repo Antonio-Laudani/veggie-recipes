@@ -43,22 +43,32 @@ Il progetto è hostato su **Netlify**, con gestione sicura della chiave API tram
 
 ## 🛠️ Setup sviluppo
 
-### 1️⃣ Clona il repository
-```bash
+1️⃣ Clona il repository
+
+Clona il progetto in locale con:
+
 git clone https://github.com/Antonio-Laudani/veggie-recipes.git
 cd veggie-recipes
+
 2️⃣ Installa le dipendenze
-bash
-Copia codice
+
+Installa tutte le dipendenze necessarie con:
+
 npm install
+
 3️⃣ Configura la API key
-bash
-Copia codice
+
+Crea un file .env nella root del progetto e aggiungi la tua chiave Spoonacular:
+
 echo "VITE_SPOON_KEY=la_tua_api_key_qui" > .env
+
 4️⃣ Avvia il server di sviluppo
-bash
-Copia codice
+
+Esegui l’app in locale con:
+
 npm run dev
+
+
 L'applicazione sarà disponibile su 👉 http://localhost:5173
 
 📜 Scripts disponibili
