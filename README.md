@@ -129,19 +129,20 @@ Tema scuro mantenuto tra le sessioni via localStorage
 Il sistema dei preferiti utilizza Redux Toolkit. Lo store è configurato centralmente e uno slice dedicato gestisce tutte le operazioni sui preferiti.
 
 ### 🧩 Meccanica dei Preferiti
-Aggiunta: salva nello stato globale e in localStorage
+**Aggiunta**: salva nello stato globale e in localStorage
 
-Rimozione: rimuove tramite ID univoco e aggiorna il localStorage
+**Rimozione**: rimuove tramite ID univoco e aggiorna il localStorage
 
-Toggle intelligente: aggiunge o rimuove in base alla presenza
+**Toggle intelligente**: aggiunge o rimuove in base alla presenza
 
-🔁 Persistenza Automatica
+### 🔁 Persistenza Automatica
 Sincronizzazione immediata tra Redux store e localStorage, garantendo persistenza tra sessioni e refresh.
 
-🔐 Sicurezza API con Netlify Functions
-⚙️ Funzione Serverless
-javascript
-Copia codice
+## 🔐 Sicurezza API con Netlify Functions
+### ⚙️ Funzione Serverless
+**JavaScript**
+**Copia codice**
+```
 // netlify/functions/spoonacular.js
 const API_KEY = process.env.VITE_SPOON_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";
