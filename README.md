@@ -96,23 +96,23 @@ Implementato un toggle nella navbar per alternare tra Lexend e font di sistema.
 ### 🌈 Palette Colori Alto Contrasto
 #### Light Mode
 
-**Sfondo: #F5F5DC (beige chiaro)**
+- **Sfondo: #F5F5DC (beige chiaro)**
 
-**Verde primario: #4CAF50**
+- **Verde primario: #4CAF50**
 
-**Verde scuro: #2E7D32**
+- **Verde scuro: #2E7D32**
 
-**Testo grigio: #555555**
+- **Testo grigio: #555555**
 
 #### Dark Mode
 
-**Sfondo: #121212 (nero quasi puro)**
+- **Sfondo: #121212 (nero quasi puro)**
 
-**Verde brillante: #81C784**
+- **Verde brillante: #81C784**
 
-**Verde molto scuro: #1B5E20**
+- **Verde molto scuro: #1B5E20**
 
-**Testo grigio chiaro: #CCCCCC**
+- **Testo grigio chiaro: #CCCCCC**
 
 🎯 **Palette ottimizzata** 
 Per alto contrasto e accessibilità, utile per utenti con daltonismo.
@@ -206,8 +206,7 @@ const fetchRecipeDetails = async (id) => {
 };
 ```
 ## ⚙️ Configurazione Environment Variables
-text
-Copia codice
+**Copia codice**
 ### Su Netlify Dashboard
 ```
 Site settings → Environment variables
@@ -227,16 +226,18 @@ VITE_SPOON_KEY = la_tua_api_key_qui
   status = 200
   ```
 ## 🧪 Test in Locale
-bash
-Copia codice
+**Copia codice**
 ### Installa Netlify CLI globalmente
+```
 npm install -g netlify-cli
-
+```
 ### Avvia app + funzioni localmente
+```
 netlify dev
+```
 App disponibile su 👉 http://localhost:8888
 
-🌐 Deploy
+## 🌐 Deploy
 Progetto su Netlify: 🔗 https://veggie-recipes.netlify.app
 
 Processo:
@@ -249,11 +250,13 @@ Deploy su Netlify (funzioni incluse)
 
 Configura env vars
 
-🐛 Risoluzione Problemi
+## 🐛 Risoluzione Problemi
 bash
 Copia codice
 # In caso di problemi di build
+```
 rm -rf node_modules && npm install
+```
 Dipendenze principali:
 
 @reduxjs/toolkit@1.9.5 — state management
