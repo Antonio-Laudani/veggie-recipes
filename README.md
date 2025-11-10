@@ -114,20 +114,21 @@ Implementato un toggle nella navbar per alternare tra Lexend e font di sistema.
 
 **Testo grigio chiaro: #CCCCCC**
 
-🎯 **Palette ottimizzata** per alto contrasto e accessibilità, utile per utenti con daltonismo.
+🎯 **Palette ottimizzata** 
+Per alto contrasto e accessibilità, utile per utenti con daltonismo.
 
 🌗 **Dark Mode Persistente**
 Tema scuro mantenuto tra le sessioni via localStorage
 
-Toggle nella navbar
+**Toggle font e Dark/Light mode** integrato nella navbar
 
-Transizioni fluide e preferenze salvate automaticamente
+**Transizioni fluide e preferenze salvate automaticamente**
 
-💾 Gestione Stato e Preferiti
-⚙️ Architettura Redux Toolkit
+## 💾Gestione Stato e Preferiti
+### ⚙️ Architettura Redux Toolkit
 Il sistema dei preferiti utilizza Redux Toolkit. Lo store è configurato centralmente e uno slice dedicato gestisce tutte le operazioni sui preferiti.
 
-🧩 Meccanica dei Preferiti
+### 🧩 Meccanica dei Preferiti
 Aggiunta: salva nello stato globale e in localStorage
 
 Rimozione: rimuove tramite ID univoco e aggiorna il localStorage
