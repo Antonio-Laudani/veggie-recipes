@@ -24,7 +24,7 @@ export default function Footer() {
           </li>
           <li>
             <a
-              href="https://x.com"
+              href="https://x.com/AntonioLaudani2"
               target="_blank"
               rel="noopener noreferrer"
               className="text-light-gray transition-colors"
@@ -34,7 +34,7 @@ export default function Footer() {
           </li>
           <li>
             <a
-              href="https://github.com"
+              href="https://github.com/Antonio-Laudani/veggie-recipes"
               target="_blank"
               rel="noopener noreferrer"
               className="text-light-gray transition-colors"
