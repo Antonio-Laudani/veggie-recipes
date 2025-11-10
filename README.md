@@ -251,27 +251,25 @@ Deploy su Netlify (funzioni incluse)
 Configura env vars
 
 ## 🐛 Risoluzione Problemi
-bash
-Copia codice
-# In caso di problemi di build
+
+### In caso di problemi di build
 ```
 rm -rf node_modules && npm install
 ```
-Dipendenze principali:
+### Dipendenze principali:
 
-@reduxjs/toolkit@1.9.5 — state management
+- **@reduxjs/toolkit@1.9.5** — state management
 
-react-redux@8.1.0 — React bindings
+- **react-redux@8.1.0** — React bindings
 
-react-icons@5.5.0 — icons
+- **react-icons@5.5.0** — icons
 
-@heroicons/react@2.2.0 — svg icons
+- **@heroicons/react@2.2.0** — svg icons
 
-flowbite@1.8.1 — UI components
+- **flowbite@1.8.1** — UI components
 
-👨‍💻 Autore
-Antonio Laudani — Frontend Developer
-🔗 GitHub: @Antonio-Laudani
-💻 Live Demo
+## 👨‍💻 Autore
+Antonio Laudani — Frontend Developer<br>
+🔗 GitHub: https://github.com/Antonio-Laudani
 
 <div align="center"> ⭐ Se ti piace questo progetto, lascia una **stella** sul repository! **Buon appetito e happy coding! 🍴💻** </div> ```
