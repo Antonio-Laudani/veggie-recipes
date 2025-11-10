@@ -1,4 +1,4 @@
-import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaXTwitter } from 'react-icons/fa';
 
 export default function Footer() {
   return (
@@ -28,7 +28,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-light-gray transition-colors"
             >
-              <FaTwitter className="w-5 h-5"/>
+              <FaXTwitter className="w-5 h-5"/>
             </a>
           </li>
           <li>
