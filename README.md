@@ -188,9 +188,11 @@ export async function handler(event) {
     };
   }
 }
-🌐 Chiamate dal Frontend
+```
+### 🌐 Chiamate dal Frontend
 javascript
 Copia codice
+```
 // Per ricerca ricette
 const fetchRecipes = async (query) => {
   const res = await fetch(`/.netlify/functions/spoonacular?query=${query}`);
@@ -202,16 +204,18 @@ const fetchRecipeDetails = async (id) => {
   const res = await fetch(`/.netlify/functions/spoonacular?id=${id}`);
   return await res.json();
 };
-⚙️ Configurazione Environment Variables
+```
+## ⚙️ Configurazione Environment Variables
 text
 Copia codice
-# Su Netlify Dashboard
+### Su Netlify Dashboard
+```
 Site settings → Environment variables
 VITE_SPOON_KEY = la_tua_api_key_qui
-📝 Configurazione Netlify
-toml
-Copia codice
-# netlify.toml
+```
+## 📝 Configurazione Netlify.toml
+### netlify.toml
+```
 [build]
   command = "npm run build"
   publish = "dist"
@@ -221,13 +225,14 @@ Copia codice
   from = "/*"
   to = "/index.html"
   status = 200
-🧪 Test in Locale
+  ```
+## 🧪 Test in Locale
 bash
 Copia codice
-# Installa Netlify CLI globalmente
+### Installa Netlify CLI globalmente
 npm install -g netlify-cli
 
-# Avvia app + funzioni localmente
+### Avvia app + funzioni localmente
 netlify dev
 App disponibile su 👉 http://localhost:8888
 
