@@ -1,4 +1,3 @@
-// src/components/IngredientCard.jsx
 export default function IngredientCard({ adjustedIngredients }) {
   return (
     <div className="card bg-light-background text-light-gray shadow-md dark:bg-dark-background dark:text-dark-gray dark:shadow-dark-green-md  p-4 rounded-lg">

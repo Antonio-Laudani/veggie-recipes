@@ -1,4 +1,3 @@
-// src/pages/Favorites.jsx
 import { useSelector, useDispatch } from "react-redux";
 import CardRicetta from "../components/CardRicetta";
 import { toggleFavorite } from "../store/favoritesSlice";

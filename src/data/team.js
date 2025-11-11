@@ -1,4 +1,3 @@
-// src/data/team.js
 export const teamMembers = [
   {
     name: "Alice Rossi",

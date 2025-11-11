@@ -1,4 +1,3 @@
-//src/hooks/useRecipeDetail.js
 import { useState, useEffect } from "react";
 import { getRecipeById } from "../API/api";
 import fallbackImg from "../assets/img/fallback.png";

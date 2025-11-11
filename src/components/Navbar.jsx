@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { useLocation, Link } from "react-router-dom";
-import { initFlowbite } from "flowbite"; // 👈 AGGIUNTA QUI
+import { initFlowbite } from "flowbite";
 
 const MyNavbar = ({ darkMode, toggleDarkMode, fontLexend, toggleFont }) => {
   const location = useLocation();
@@ -34,7 +34,7 @@ useEffect(() => {
     const isToggleButton = e.target === toggleBtn || toggleBtn.contains(e.target);
     const isMenu = collapseMenu.contains(e.target);
     
-    // Se clicco fuori E il menu è aperto
+  
     if (!isToggleButton && !isMenu && !collapseMenu.classList.contains("hidden")) {
       toggleBtn.click();
     }

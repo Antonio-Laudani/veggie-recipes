@@ -1,4 +1,3 @@
-// src/hooks/useServings.js
 //incremento decremento
 export default function useServings(initialServings = 1) {
   const incrementServings = (setServings) =>

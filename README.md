@@ -272,4 +272,4 @@ rm -rf node_modules && npm install
 Antonio Laudani — Frontend Developer<br>
 🔗 GitHub: https://github.com/Antonio-Laudani
 
-<div align="center"> ⭐ Se ti piace questo progetto, lascia una <strong>stella</strong> sul repository! <strong>Buon appetito e happy coding!</strong> 🍴💻 </div> ```
+<div align="center"> ⭐ Se ti piace questo progetto, lascia una <strong>stella</strong> sul repository! <strong>Buon appetito e happy coding!</strong> 🍴💻 </div>

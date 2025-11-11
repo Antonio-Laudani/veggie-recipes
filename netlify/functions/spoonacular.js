@@ -7,7 +7,7 @@ export async function handler(event) {
   const { path, queryStringParameters } = event;
 
   try {
-    // rotta per ricerca
+    // Ricerca
     if (path.includes("search")) {
       const query = queryStringParameters.query;
       const res = await fetch(
@@ -20,7 +20,7 @@ export async function handler(event) {
       };
     }
 
-    // rotta per dettaglio
+    // Dettaglio
     if (path.includes("recipe")) {
       const id = queryStringParameters.id;
       const res = await fetch(

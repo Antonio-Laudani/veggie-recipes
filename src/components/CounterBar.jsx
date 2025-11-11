@@ -1,4 +1,3 @@
-// src/components/CounterBar.jsx
 export default function CounterBar({
   servings,
   incrementServings,

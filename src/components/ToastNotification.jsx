@@ -1,5 +1,4 @@
-// src/components/ToastNotification.jsx
-import "flowbite"; // importa side-effect: aggiunge Toast a window
+import "flowbite";
 export function showToast(message, type = "success") {
   const toastEl = document.createElement("div");
 

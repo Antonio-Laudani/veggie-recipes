@@ -1,4 +1,3 @@
-// src/store/index.js
 import { configureStore } from "@reduxjs/toolkit";
 import recipesReducer from "./recipesSlice";
 import favoritesReducer from "./favoritesSlice"; // se già esiste
