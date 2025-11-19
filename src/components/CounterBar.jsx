@@ -1,10 +1,17 @@
 export default function CounterBar({
   servings,
-  incrementServings,
-  decrementServings,
+  setServings,
   readyInMinutes,
-  calories,
+  calories
 }) {
+  const incrementServings = () => {
+    setServings(prev => prev + 1);
+  };
+
+  const decrementServings = () => {
+    setServings(prev => Math.max(1, prev - 1));
+  };
+
   return (
     <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6
                     bg-light-background text-light-gray shadow-md dark:bg-dark-background

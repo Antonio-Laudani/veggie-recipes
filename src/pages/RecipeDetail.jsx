@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleFavorite } from "../store/favoritesSlice";
 import { showToast } from "../components/ToastNotification";
 import useRecipeDetail from "../hooks/useRecipeDetail";
-import useServings from "../hooks/useServings";
 
 // Components
 import RecipeHeader from "../components/RecipeHeader";
@@ -22,7 +21,6 @@ export default function RecipeDetail() {
   const isFavorite = favorites.some((f) => f.id === Number(id));
 
   const { recipe, loading, error, servings, setServings } = useRecipeDetail(id);
-  const { incrementServings, decrementServings } = useServings();
 
   const toggleFavoriteHandler = () => {
     if (recipe) {
@@ -72,11 +70,10 @@ export default function RecipeDetail() {
       </div>
 
       <CounterBar
-        servings={servings}
-        incrementServings={() => incrementServings(setServings)}
-        decrementServings={() => decrementServings(setServings)}
-        readyInMinutes={recipe.readyInMinutes}
-        calories={adjustedCalories}
+         servings={servings}
+         setServings={setServings}
+         readyInMinutes={recipe.readyInMinutes}
+         calories={adjustedCalories}
       />
 
       <IngredientCard adjustedIngredients={adjustedIngredients} />
