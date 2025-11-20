@@ -4,8 +4,8 @@ export default function IngredientCard({ adjustedIngredients }) {
       <h2 className="text-xl font-semibold mb-2">Ingredients</h2>
       {adjustedIngredients.length > 0 ? (
         <ul className="list-disc list-inside space-y-1">
-          {adjustedIngredients.map((ing) => (
-            <li key={ing.id}>
+          {adjustedIngredients.map((ing, index) => (
+            <li key={`${ing.id}-${index}`}>
               {ing.amount.toFixed(1)} {ing.unit} {ing.name}
             </li>
           ))}
