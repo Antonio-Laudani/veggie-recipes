@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from "react-redux";
 import { store } from "./store/index";
+import { AppProvider } from './contexts/AppContext';
 import MyNavbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -9,21 +10,13 @@ import RecipeDetail from './pages/RecipeDetail';
 import Favorites from './pages/Favorites';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import useDarkMode from "./hooks/useDarkMode";
-import useFont from './hooks/useFont';
 import './index.css';
 import 'flowbite';
 
 function App() {
+  // Rimuovi gli useEffects duplicati - ora sono nel Context
 
-  const { darkMode, toggleDarkMode } = useDarkMode();
-   const { fontLexend, toggleFont } = useFont();
-  useEffect(() => {
-    const root = document.documentElement;
-    root.classList.toggle('font-lexend', fontLexend);
-    root.classList.toggle('font-classico', !fontLexend);
-  }, [fontLexend]);
-   // Evita problemi di rendering al cambio di pagina
+  // Solo effetto per transizioni (rimane)
   useEffect(() => {
     const html = document.documentElement;
     html.classList.add("transition-none");
@@ -33,37 +26,25 @@ function App() {
     return () => clearTimeout(timeout);
   }, []);
 
-
   return (
     <Provider store={store}>
-
-    <Router>
-      <div className="min-h-screen flex flex-col transition-colors duration-300">
-        <MyNavbar 
-          fontLexend={fontLexend} 
-          toggleFont={toggleFont} 
-          darkMode={darkMode} 
-          toggleDarkMode={toggleDarkMode} 
-        />
-
-        <main className="flex-grow pt-16">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/recipe/:id" element={<RecipeDetail />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
-
-        <Footer
-          fontLexend={fontLexend}
-          toggleFont={toggleFont}
-          darkMode={darkMode}
-          toggleDarkMode={toggleDarkMode}
-        />
-      </div>
-    </Router>
+      <AppProvider>
+        <Router>
+          <div className="min-h-screen flex flex-col transition-colors duration-300">
+            <MyNavbar /> {/* Niente props! */}
+            <main className="flex-grow pt-16">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/recipe/:id" element={<RecipeDetail />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
+            </main>
+            <Footer /> {/* Niente props! */}
+          </div>
+        </Router>
+      </AppProvider>
     </Provider>
   );
 }

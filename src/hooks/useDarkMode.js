@@ -1,3 +1,4 @@
+/* 
 import { useState, useEffect } from "react";
 
 export default function useDarkMode() {
@@ -27,3 +28,4 @@ export default function useDarkMode() {
   return { darkMode, toggleDarkMode };
 }
 
+*/

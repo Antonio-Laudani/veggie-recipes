@@ -1,3 +1,4 @@
+/* 
 import { useState, useEffect } from "react";
 
 export default function useFont() {
@@ -26,3 +27,4 @@ export default function useFont() {
 
   return { fontLexend, toggleFont };
 }
+*/
