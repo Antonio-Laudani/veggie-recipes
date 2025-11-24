@@ -84,7 +84,7 @@ const MyNavbar = () => {
             {fontLexend ? "Lexend" : "Classic"}
           </button>
 
-          {/* Mobile toggle button - VERSIONE REACT */}
+          {/* Mobile toggle button*/}
           <button
             ref={toggleButtonRef}
             type="button"

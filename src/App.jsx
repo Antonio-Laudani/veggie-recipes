@@ -13,9 +13,9 @@ import Contact from './pages/Contact';
 import './index.css';
 
 function App() {
-  // Rimuovi gli useEffects duplicati - ora sono nel Context
 
-  // Solo effetto per transizioni (rimane)
+
+  // Effetto per transizioni
   useEffect(() => {
     const html = document.documentElement;
     html.classList.add("transition-none");
@@ -30,7 +30,7 @@ function App() {
       <AppProvider>
         <Router>
           <div className="min-h-screen flex flex-col transition-colors duration-300">
-            <MyNavbar /> {/* Niente props! */}
+            <MyNavbar /> 
             <main className="flex-grow pt-16">
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -40,7 +40,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
               </Routes>
             </main>
-            <Footer /> {/* Niente props! */}
+            <Footer /> 
           </div>
         </Router>
       </AppProvider>
