@@ -1,24 +1,30 @@
 // src/API/api.js
+import { fetchWithTimeout, ApiError } from './apiHelper';
+
 const BASE_URL = "/.netlify/functions/spoonacular";
 
 export async function searchRecipes(query) {
-  const res = await fetch(`${BASE_URL}/search?query=${query}`);
-  if (!res.ok) throw new Error("Errore nella fetch delle ricette");
-  
-  const data = await res.json();
-  
-  // Gestisci entrambi i formati: risposta completa o solo array
-  if (Array.isArray(data)) {
-    return data; // Già nel formato corretto (funzione serverless)
-  } else if (data && Array.isArray(data.results)) {
-    return data.results; // Estrai l'array dalla risposta Spoonacular
-  } else {
-    throw new Error("Formato risposta API non valido");
+  try {
+    const data = await fetchWithTimeout(`${BASE_URL}/search?query=${encodeURIComponent(query)}`);
+    
+    // Solo logica di formattazione dati
+    if (Array.isArray(data)) {
+      return data;
+    } else if (data && Array.isArray(data.results)) {
+      return data.results;
+    } else {
+      throw new ApiError('Formato risposta non valido', 500);
+    }
+  } catch (error) {
+    // SEMPLICE: rilancia sempre ApiError - i componenti si occuperanno dei messaggi
+    throw error;
   }
 }
 
 export async function getRecipeById(id) {
-  const res = await fetch(`${BASE_URL}/recipe?id=${id}`);
-  if (!res.ok) throw new Error("Errore nel recupero della ricetta");
-  return await res.json();
+  try {
+    return await fetchWithTimeout(`${BASE_URL}/recipe?id=${id}`);
+  } catch (error) {
+    throw error; // ApiError già formattato
+  }
 }

@@ -11,7 +11,6 @@ import Favorites from './pages/Favorites';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import './index.css';
-import 'flowbite';
 
 function App() {
   // Rimuovi gli useEffects duplicati - ora sono nel Context
