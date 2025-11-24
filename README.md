@@ -24,7 +24,7 @@ Il progetto è hostato su **Netlify**, con gestione sicura della chiave API tram
 |-----------|-----------|
 | **Frontend** | React 18, React Router DOM, Redux Toolkit |
 | **Build Tool** | Vite |
-| **Styling** | Tailwind CSS, Flowbite Components |
+| **Styling** | Tailwind CSS, Flowbite |
 | **Icons** | Heroicons, React Icons |
 | **State Management** | Redux Toolkit, React Context |
 | **API** | Spoonacular Food API |
@@ -191,7 +191,6 @@ export async function handler(event) {
 ```
 ### 🌐 Chiamate dal Frontend
 javascript
-Copia codice
 ```
 // Per ricerca ricette
 const fetchRecipes = async (query) => {
@@ -206,7 +205,6 @@ const fetchRecipeDetails = async (id) => {
 };
 ```
 ## ⚙️ Configurazione Environment Variables
-**Copia codice**
 ### Su Netlify Dashboard
 ```
 Site settings → Environment variables
@@ -226,7 +224,6 @@ VITE_SPOON_KEY = la_tua_api_key_qui
   status = 200
   ```
 ## 🧪 Test in Locale
-**Copia codice**
 ### Installa Netlify CLI globalmente
 ```
 npm install -g netlify-cli
@@ -266,7 +263,7 @@ rm -rf node_modules && npm install
 
 - **@heroicons/react@2.2.0** — svg icons
 
-- **flowbite@1.8.1** — UI components
+- **flowbite@1.8.1** — Gestione Dark mode
 
 ## 👨‍💻 Autore
 Antonio Laudani — Frontend Developer<br>
